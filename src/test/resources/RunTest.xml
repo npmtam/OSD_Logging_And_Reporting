@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="TC01_Create_A_New_Account" parallel="none">
+
+    <listeners>
+        <listener class-name="reportConfig.AllureTestListener"/>
+    </listeners>
+
+    <test name="RUN ON CHROME UI">
+        <classes>
+            <class name="TC01_Create_Account" />
+        </classes>
+    </test>
+
+</suite> <!-- Suite -->

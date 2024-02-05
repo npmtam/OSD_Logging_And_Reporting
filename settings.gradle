@@ -1,0 +1,13 @@
+rootProject.name = "OSD_Reporting_and_Logging"
+include("src")
+include("src:common")
+findProject(":src:common")?.name = "common"
+include 'src:java'
+findProject(':src:java')?.name = 'java'
+include 'src:java:test'
+findProject(':src:java:test')?.name = 'test'
+include 'src:java:common:pageObject'
+findProject(':src:java:common:pageObject')?.name = 'pageObject'
+include 'src:main'
+findProject(':src:main')?.name = 'main'
+
