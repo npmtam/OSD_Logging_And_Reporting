@@ -101,7 +101,7 @@ public class AbstractPage {
             File file = new File(pathFolder);
             File[] listOfFiles = file.listFiles();
             for(int i=0; i<listOfFiles.length; i++){
-                if (listOfFiles[i].isFile()){
+                if (listOfFiles[i].isFile() && !listOfFiles[i].getName().endsWith(".properties")){
                     new File(listOfFiles[i].toString()).delete();
                 }
             }

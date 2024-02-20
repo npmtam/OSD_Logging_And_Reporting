@@ -18,7 +18,9 @@ public class Subject7PO extends AbstractPage {
     static final String CONFIRM_PASSWORD_TEXTBOX = "//input[@id='passwordConfirm']";
     static final String REGISTER_ACCOUNT_BUTTON = "//input[@value='Register']";
     static final String LOGIN_HEADRER = "//div[@class='panel-heading']/span[text()='Login']";
-
+    static final String LOGIN_BUTTON = "//button[text()='Login']";
+    static final String FIRST_NAME_LABEL_AFTER_LOGIN = "//li[@class='dropdown']//span[@ng-bind='principal.firstName']";
+    static final String LAST_NAME_LABEL_AFTER_LOGIN = "//li[@class='dropdown']//span[@ng-bind='principal.lastName']";
 
 
 
@@ -59,5 +61,20 @@ public class Subject7PO extends AbstractPage {
 
     public boolean isLoginPageDisplayed(){
         return isElementPresentInDOM(LOGIN_HEADRER);
+    }
+
+    public void clickToLoginButton(){
+        waitToElementVisible(LOGIN_BUTTON);
+        clickToElement(LOGIN_BUTTON);
+    }
+
+    public String getFirstNameLabelAfterLogin(){
+        waitToElementVisible(FIRST_NAME_LABEL_AFTER_LOGIN);
+        return getTextElement(FIRST_NAME_LABEL_AFTER_LOGIN);
+    }
+
+    public String getLastNameLabelAfterLogin(){
+        waitToElementVisible(LAST_NAME_LABEL_AFTER_LOGIN);
+        return getTextElement(LAST_NAME_LABEL_AFTER_LOGIN);
     }
 }

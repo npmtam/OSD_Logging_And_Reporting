@@ -1,4 +1,5 @@
 
+import com.github.javafaker.Faker;
 import common.AbstractTest;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
@@ -17,14 +18,15 @@ public class TC01_Create_Account extends AbstractTest {
         driver = getBrowserDriver("chrome");
         subject7Page = new Subject7PO(driver);
         subject7Page.deleteFilesInAllureReport();
-        firstName = "Nguyen";
-        lastName = "Tam";
-        emai = "tam.nguyen@orientsoftware.com";
+        Faker faker = new Faker();
+        firstName = faker.name().firstName();
+        lastName = faker.name().lastName();
+        emai = faker.internet().emailAddress();
         password = "Abc123";
     }
 
     @Test
-    public void createAnAccount(){
+    public void TC01_CreateAnAccount(){
         log.info("TC01 - Step 01 - Go to Reference Subject7");
         subject7Page.openURL("https://reference.subject-7.com/#/");
 
@@ -44,6 +46,20 @@ public class TC01_Create_Account extends AbstractTest {
         subject7Page.clickToRegisterAccount();
         log.info("TC01 - Step 08 - Verify the account created successfully");
         verifyTrue(subject7Page.isLoginPageDisplayed());
+    }
+
+    @Test
+    public void TC02_LoginToSystem(){
+        log.info("TC02 - Step 01 - Input to email");
+        subject7Page.inputToEmail(emai);
+        log.info("TC02 - Step 02 - Input to password");
+        subject7Page.inputToPassword(password);
+        log.info("TC02 - Step 03 - Click to login button");
+        subject7Page.clickToLoginButton();
+        log.info("TC02 - Step 04 - Verify the first name after login is matched with the first name registered");
+        verifyTrue(subject7Page.getFirstNameLabelAfterLogin().equalsIgnoreCase(firstName));
+        log.info("TC02 - Step 05 - Verify the last name after login is matched with the last name registered");
+        verifyTrue(subject7Page.getLastNameLabelAfterLogin().equalsIgnoreCase(lastName));
     }
 
     @AfterTest
